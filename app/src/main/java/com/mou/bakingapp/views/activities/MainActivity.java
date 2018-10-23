@@ -1,7 +1,9 @@
-package com.mou.bakingapp;
+package com.mou.bakingapp.views.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.mou.bakingapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
