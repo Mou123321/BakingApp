@@ -19,6 +19,14 @@ public class RecipePostViewmodel {
     }
 
     public void setNavigator(MainActivityNavigator navigator) {
+        System.out.println("set navigator");
         mNavigator = new WeakReference<>(navigator);
+    }
+
+    public void recipeClicked() {
+        if (mNavigator != null && mNavigator.get() != null) {
+            System.out.println("clicked");
+            mNavigator.get().displayRecipe(position);
+        }
     }
 }

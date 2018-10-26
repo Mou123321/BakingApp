@@ -1,6 +1,11 @@
 package com.mou.bakingapp.data.models;
 
-public class StepModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
+
+public class StepModel implements Parcelable {
 
     private int id;
     private String shortDescription;
@@ -14,6 +19,24 @@ public class StepModel {
         this.description = description;
         this.videoURL = videoURL;
         this.thumbnailURL = thumbnailURL;
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public StepModel createFromParcel(Parcel in) {
+            return new StepModel(in);
+        }
+
+        public StepModel[] newArray(int size) {
+            return new StepModel[size];
+        }
+    };
+
+    private StepModel(Parcel in) {
+        this.id = in.readInt();
+        this.shortDescription = in.readString();
+        this.description = in.readString();
+        this.videoURL = in.readString();
+        this.thumbnailURL = in.readString();
     }
 
     public int getId() {
@@ -54,5 +77,19 @@ public class StepModel {
 
     public void setThumbnailURL(String thumbnailURL) {
         this.thumbnailURL = thumbnailURL;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.shortDescription);
+        dest.writeString(this.description);
+        dest.writeString(this.videoURL);
+        dest.writeString(this.thumbnailURL);
     }
 }
