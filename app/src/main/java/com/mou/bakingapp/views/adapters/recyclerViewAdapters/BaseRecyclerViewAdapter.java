@@ -7,22 +7,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.mou.bakingapp.BR;
-import com.mou.bakingapp.R;
-import com.mou.bakingapp.viewmodels.RecipePostViewmodel;
-import com.mou.bakingapp.views.navigators.MainActivityNavigator;
 
-import java.util.List;
-
-public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerViewAdapter.BaseRecyclerViewViewHolder>{
-
-    private List<String> recipes;
-
-    private MainActivityNavigator mNavigator;
-
-    public BaseRecyclerViewAdapter(List<String> recipes, MainActivityNavigator navigator) {
-        this.recipes = recipes;
-        mNavigator = navigator;
-    }
+public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerViewAdapter.BaseRecyclerViewViewHolder>{
 
     @Override
     public BaseRecyclerViewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -34,23 +20,24 @@ public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerVi
 
     @Override
     public void onBindViewHolder(BaseRecyclerViewViewHolder holder, int position) {
-        holder.bind(recipes.get(position), position);
+        holder.bind(getListObject(position));
     }
 
     @Override
     public int getItemCount() {
-        return recipes.size();
+        return getListSize();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.recipe_item;
+        return getLayoutId(position);
     }
 
-    public void update(List<String> name) {
-        recipes = name;
-        notifyDataSetChanged();
-    }
+    protected abstract int getLayoutId(int position);
+
+    protected abstract Object getListObject(int position);
+
+    protected abstract int getListSize();
 
     public class BaseRecyclerViewViewHolder extends RecyclerView.ViewHolder {
         private final ViewDataBinding mBinding;
@@ -60,10 +47,8 @@ public class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerVi
             this.mBinding = binding;
         }
 
-        public void bind(String name, int position) {
-            RecipePostViewmodel vm = new RecipePostViewmodel(name, position);
-            vm.setNavigator(mNavigator);
-            mBinding.setVariable(BR.vm, vm);
+        public void bind(Object object) {
+            mBinding.setVariable(BR.vm, object);
             mBinding.executePendingBindings();
         }
     }

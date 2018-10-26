@@ -2,17 +2,16 @@ package com.mou.bakingapp.views.activities;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.mou.bakingapp.R;
 import com.mou.bakingapp.data.Repository;
-import com.mou.bakingapp.data.models.RecipeModel;
 import com.mou.bakingapp.databinding.ActivityMainBinding;
 import com.mou.bakingapp.viewmodels.MainActivityViewmodel;
-import com.mou.bakingapp.views.adapters.recyclerViewAdapters.BaseRecyclerViewAdapter;
+import com.mou.bakingapp.views.adapters.recyclerViewAdapters.RecipeRecyclerViewAdapter;
 import com.mou.bakingapp.views.navigators.MainActivityNavigator;
 
 import java.util.ArrayList;
@@ -26,10 +25,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        viewmodel = new MainActivityViewmodel(Repository.getInstance());
+        viewmodel = new MainActivityViewmodel(Repository.getInstance(), this);
         binding.setVm(viewmodel);
 
-        BaseRecyclerViewAdapter adapter = new BaseRecyclerViewAdapter(new ArrayList<>(), this);
+        RecipeRecyclerViewAdapter adapter = new RecipeRecyclerViewAdapter(new ArrayList<>());
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
