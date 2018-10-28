@@ -1,24 +1,28 @@
 package com.mou.bakingapp.views.adapters.recyclerViewAdapters;
 
 import com.mou.bakingapp.R;
+import com.mou.bakingapp.viewmodels.RecipeDetailItemViewmode;
 
 import java.util.List;
 
 public class RecipeDetailRecyclerViewAdapter extends BaseRecyclerViewAdapter{
-    private List<String> list;
+    private List<RecipeDetailItemViewmode> list;
 
-    public RecipeDetailRecyclerViewAdapter(List<String> list) {
+    public RecipeDetailRecyclerViewAdapter(List<RecipeDetailItemViewmode> list) {
         this.list = list;
+        for (RecipeDetailItemViewmode viewmode : list) {
+            System.out.println(viewmode.itemName);
+        }
     }
 
     @Override
     protected int getLayoutId(int position) {
-        return R.layout.recipe_item;
+        return R.layout.recipe_detail_item;
     }
 
     @Override
     protected Object getListObject(int position) {
-        return null;
+        return list.get(position);
     }
 
     @Override

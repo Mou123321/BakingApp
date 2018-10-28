@@ -48,9 +48,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseR
         }
 
         public void bind(Object object) {
-            if (object != null) {
-                mBinding.setVariable(BR.vm, object);
-            }
+            mBinding.setVariable(BR.vm, object);
             mBinding.executePendingBindings();
         }
     }

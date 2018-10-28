@@ -4,6 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ public class DetailFragment extends Fragment{
     private FragmentDetailBinding binding;
     private RecipeDetailViewmode viewmode;
 
+    public DetailFragment() {}
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,15 +31,15 @@ public class DetailFragment extends Fragment{
         binding = DataBindingUtil.bind(inflater.inflate(R.layout.fragment_detail, container, false));
 
         RecipeModel recipeModel = getArguments().getParcelable("recipe");
-        viewmode = new RecipeDetailViewmode(recipeModel);
+        viewmode = new RecipeDetailViewmode(recipeModel, (RecipeDetailNavigator) getActivity());
 
-        RecipeDetailRecyclerViewAdapter adapter = new RecipeDetailRecyclerViewAdapter(viewmode.descriptions);
+        RecipeDetailRecyclerViewAdapter adapter = new RecipeDetailRecyclerViewAdapter(viewmode.getDetail());
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        binding.recyclerView.setLayoutManager(layoutManager);
 
         binding.recyclerView.setAdapter(adapter);
-
-        viewmode.setNavigator((RecipeDetailNavigator) getActivity());
-
-        binding.setVm(viewmode);
 
         return binding.getRoot();
     }
