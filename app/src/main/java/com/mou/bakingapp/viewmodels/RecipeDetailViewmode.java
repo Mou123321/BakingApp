@@ -10,11 +10,14 @@ import java.util.List;
 public class RecipeDetailViewmode {
 
     public List<String> descriptions;
+    public String name;
+
     private RecipeDetailNavigator navigator;
 
 
     public RecipeDetailViewmode(RecipeModel recipeModel, RecipeDetailNavigator navigator) {
         descriptions = new ArrayList<>();
+        name = recipeModel.getName();
         for(StepModel stepModel : recipeModel.getSteps()) {
             descriptions.add(stepModel.getShortDescription());
         }
