@@ -22,4 +22,14 @@ public class RecipeDetailItemViewmode {
     public void setNavigator(RecipeDetailNavigator navigator) {
         mNavigator = new WeakReference<>(navigator);
     }
+
+    public void itemClicked() {
+        if(mNavigator != null && mNavigator.get() != null) {
+            if (position == 0) {
+                mNavigator.get().showIngredients();
+            } else {
+                mNavigator.get().showStep(position - 1);
+            }
+        }
+    }
 }

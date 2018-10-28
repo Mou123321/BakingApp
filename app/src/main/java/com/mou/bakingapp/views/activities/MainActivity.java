@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityNavig
         binding.recyclerView.setAdapter(adapter);
 
         viewmodel.setRecipes(adapter);
+
+        System.out.println("on create called");
     }
 
     @Override
@@ -46,4 +48,5 @@ public class MainActivity extends AppCompatActivity implements MainActivityNavig
         System.out.println(viewmodel.getRecipes().get(position).getSteps().get(0).getShortDescription());
         startActivity(intent);
     }
+
 }

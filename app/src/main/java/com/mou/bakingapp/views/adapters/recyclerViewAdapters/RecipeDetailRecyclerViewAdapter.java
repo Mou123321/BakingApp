@@ -10,9 +10,6 @@ public class RecipeDetailRecyclerViewAdapter extends BaseRecyclerViewAdapter{
 
     public RecipeDetailRecyclerViewAdapter(List<RecipeDetailItemViewmode> list) {
         this.list = list;
-        for (RecipeDetailItemViewmode viewmode : list) {
-            System.out.println(viewmode.itemName);
-        }
     }
 
     @Override

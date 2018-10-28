@@ -2,7 +2,6 @@ package com.mou.bakingapp.views.fragments;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,9 +23,8 @@ public class DetailFragment extends Fragment{
 
     public DetailFragment() {}
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         binding = DataBindingUtil.bind(inflater.inflate(R.layout.fragment_detail, container, false));
 
